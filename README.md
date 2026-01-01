@@ -73,11 +73,15 @@ go get github.com/daniel-sullivan/go2rtc-client@v1.9.13
 
 ## Automated Releases
 
-New releases are created automatically via GitHub Actions. When a new version of go2rtc is released, a maintainer can trigger the release workflow with the go2rtc version tag, which will:
+Releases are automated via GitHub Actions. When you create a draft release:
 
-1. Download the OpenAPI spec from that version
-2. Generate the client code
-3. Create a matching release in this repository
+1. The workflow is triggered automatically
+2. It downloads the OpenAPI spec from the matching go2rtc version
+3. Generates the client code
+4. Commits the generated code
+5. Publishes the release with full documentation
+
+The release description is updated in real-time showing generation progress!
 
 ---
 
@@ -213,16 +217,23 @@ The client generation is configured in `oapi-codegen.yaml`. You can customize:
 
 To create a new release matching a go2rtc version:
 
-1. Go to the [Actions tab](../../actions/workflows/release.yml) in GitHub
-2. Click "Run workflow"
-3. Enter the go2rtc version tag (e.g., `v1.9.13`)
-4. Click "Run workflow"
+1. Go to the [Releases page](../../releases) in GitHub
+2. Click "Draft a new release"
+3. Enter the tag (e.g., `v1.9.13`) - **must match a go2rtc release tag**
+4. Enter a release title (e.g., `Release v1.9.13`)
+5. Click "Save draft" (do NOT publish yet)
 
-The workflow will:
-- Download the OpenAPI spec from the specified go2rtc version
+The workflow will automatically:
+- Detect the draft release creation
+- Update the release description with progress messages
+- Download the OpenAPI spec from the matching go2rtc tag
 - Generate the client code
-- Commit the generated code
-- Create a new release with the same version tag
+- Delete the temporary tag
+- Commit the generated code to the repository
+- Recreate the tag pointing to the new commit
+- Publish the release with installation instructions
+
+You can watch the progress in real-time by refreshing the draft release page!
 
 ## License
 
