@@ -91,7 +91,7 @@ jobs:
         run: |
           git add client.go go.mod go.sum
           git commit -m "Generate client for go2rtc ${{ github.event.release.tag_name }}" || echo "No changes to commit"
-          git push origin main
+          git push origin master
 
       - name: Create tag
         run: |
