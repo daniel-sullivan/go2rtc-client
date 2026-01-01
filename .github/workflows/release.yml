@@ -24,6 +24,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -88,7 +91,7 @@ jobs:
         run: |
           git add client.go go.mod go.sum
           git commit -m "Generate client for go2rtc ${{ github.event.release.tag_name }}" || echo "No changes to commit"
-          git push origin HEAD:main
+          git push origin main
 
       - name: Create tag
         run: |

@@ -73,13 +73,13 @@ go get github.com/daniel-sullivan/go2rtc-client@v1.9.13
 
 ## Automated Releases
 
-Releases are automated via GitHub Actions. When you create a draft release:
+Releases are automated via GitHub Actions. When you publish a release:
 
 1. The workflow is triggered automatically
 2. It downloads the OpenAPI spec from the matching go2rtc version
 3. Generates the client code
 4. Commits the generated code
-5. Publishes the release with full documentation
+5. Updates the release description with installation instructions
 
 The release description is updated in real-time showing generation progress!
 
@@ -221,19 +221,19 @@ To create a new release matching a go2rtc version:
 2. Click "Draft a new release"
 3. Enter the tag (e.g., `v1.9.13`) - **must match a go2rtc release tag**
 4. Enter a release title (e.g., `Release v1.9.13`)
-5. Click "Save draft" (do NOT publish yet)
+5. Click "Publish release"
 
 The workflow will automatically:
-- Detect the draft release creation
+- Detect the release publication
 - Update the release description with progress messages
 - Download the OpenAPI spec from the matching go2rtc tag
 - Generate the client code
 - Delete the temporary tag
 - Commit the generated code to the repository
 - Recreate the tag pointing to the new commit
-- Publish the release with installation instructions
+- Update the release with full installation instructions
 
-You can watch the progress in real-time by refreshing the draft release page!
+You can watch the progress in real-time by refreshing the release page!
 
 ## License
 
