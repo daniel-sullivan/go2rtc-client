@@ -47,13 +47,6 @@ const (
 	VideoFilterMjpeg VideoFilter = "mjpeg"
 )
 
-// Defines values for GetApiFrameJpegsrcSrcParamsRotate.
-const (
-	GetApiFrameJpegsrcSrcParamsRotateN180 GetApiFrameJpegsrcSrcParamsRotate = 180
-	GetApiFrameJpegsrcSrcParamsRotateN270 GetApiFrameJpegsrcSrcParamsRotate = 270
-	GetApiFrameJpegsrcSrcParamsRotateN90  GetApiFrameJpegsrcSrcParamsRotate = 90
-)
-
 // Defines values for GetApiStreamM3u8srcSrcParamsMp4.
 const (
 	GetApiStreamM3u8srcSrcParamsMp4All   GetApiStreamM3u8srcSrcParamsMp4 = "all"
@@ -79,13 +72,6 @@ const (
 	GetApiStreamM3u8srcSrcParamsAudioPcm   GetApiStreamM3u8srcSrcParamsAudio = "pcm"
 	GetApiStreamM3u8srcSrcParamsAudioPcma  GetApiStreamM3u8srcSrcParamsAudio = "pcma"
 	GetApiStreamM3u8srcSrcParamsAudioPcmu  GetApiStreamM3u8srcSrcParamsAudio = "pcmu"
-)
-
-// Defines values for GetApiStreamMp4srcSrcParamsRotate.
-const (
-	GetApiStreamMp4srcSrcParamsRotateN180 GetApiStreamMp4srcSrcParamsRotate = 180
-	GetApiStreamMp4srcSrcParamsRotateN270 GetApiStreamMp4srcSrcParamsRotate = 270
-	GetApiStreamMp4srcSrcParamsRotateN90  GetApiStreamMp4srcSrcParamsRotate = 90
 )
 
 // Defines values for GetApiStreamMp4srcSrcParamsMp4.
@@ -118,9 +104,6 @@ const (
 // AudioFilter defines model for audio_filter.
 type AudioFilter string
 
-// HlsSessionIdPath defines model for hls_session_id_path.
-type HlsSessionIdPath = string
-
 // Mp4Filter defines model for mp4_filter.
 type Mp4Filter string
 
@@ -148,95 +131,6 @@ type PostApiExitParams struct {
 	Code *int `form:"code,omitempty" json:"code,omitempty"`
 }
 
-// PostApiFfmpegParams defines parameters for PostApiFfmpeg.
-type PostApiFfmpegParams struct {
-	// Dst Destination stream name
-	Dst string `form:"dst" json:"dst"`
-
-	// File Input URL to treat as file (`#input=file`)
-	File *string `form:"file,omitempty" json:"file,omitempty"`
-
-	// Live Live input URL
-	Live *string `form:"live,omitempty" json:"live,omitempty"`
-
-	// Text Text-to-speech phrase
-	Text *string `form:"text,omitempty" json:"text,omitempty"`
-
-	// Voice Optional TTS voice (engine-dependent)
-	Voice *string `form:"voice,omitempty" json:"voice,omitempty"`
-}
-
-// GetApiFrameJpegsrcSrcParams defines parameters for GetApiFrameJpegsrcSrc.
-type GetApiFrameJpegsrcSrcParams struct {
-	// Name Optional stream name to create/update if `src` is a URL
-	Name *string `form:"name,omitempty" json:"name,omitempty"`
-
-	// Width Scale output width (alias: `w`)
-	Width *int `form:"width,omitempty" json:"width,omitempty"`
-
-	// Height Scale output height (alias: `h`)
-	Height *int `form:"height,omitempty" json:"height,omitempty"`
-
-	// Rotate Rotate output (degrees). Supported values: 90, 180, 270.
-	Rotate *GetApiFrameJpegsrcSrcParamsRotate `form:"rotate,omitempty" json:"rotate,omitempty"`
-
-	// Hardware Hardware acceleration engine for FFmpeg snapshot transcoding (alias: `hw`)
-	Hardware *string `form:"hardware,omitempty" json:"hardware,omitempty"`
-}
-
-// GetApiFrameJpegsrcSrcParamsRotate defines parameters for GetApiFrameJpegsrcSrc.
-type GetApiFrameJpegsrcSrcParamsRotate int
-
-// GetApiFrameMp4srcSrcParams defines parameters for GetApiFrameMp4srcSrc.
-type GetApiFrameMp4srcSrcParams struct {
-	// Filename Download as a file with this name
-	Filename *string `form:"filename,omitempty" json:"filename,omitempty"`
-}
-
-// DeleteApiHomekitParams defines parameters for DeleteApiHomekit.
-type DeleteApiHomekitParams struct {
-	// Id Stream name / server ID
-	Id string `form:"id" json:"id"`
-}
-
-// GetApiHomekitParams defines parameters for GetApiHomekit.
-type GetApiHomekitParams struct {
-	// Id Optional stream name (server ID)
-	Id *string `form:"id,omitempty" json:"id,omitempty"`
-}
-
-// PostApiHomekitParams defines parameters for PostApiHomekit.
-type PostApiHomekitParams struct {
-	// Id Stream name to create/update
-	Id string `form:"id" json:"id"`
-
-	// Src HomeKit URL (without pin)
-	Src string `form:"src" json:"src"`
-
-	// Pin HomeKit PIN
-	Pin string `form:"pin" json:"pin"`
-}
-
-// GetApiHomekitAccessoriesParams defines parameters for GetApiHomekitAccessories.
-type GetApiHomekitAccessoriesParams struct {
-	// Id Stream name
-	Id string `form:"id" json:"id"`
-}
-
-// GetApiNestParams defines parameters for GetApiNest.
-type GetApiNestParams struct {
-	ClientId     string `form:"client_id" json:"client_id"`
-	ClientSecret string `form:"client_secret" json:"client_secret"`
-	RefreshToken string `form:"refresh_token" json:"refresh_token"`
-	ProjectId    string `form:"project_id" json:"project_id"`
-}
-
-// GetApiOnvifParams defines parameters for GetApiOnvif.
-type GetApiOnvifParams struct {
-	// Src Optional ONVIF device URL to enumerate profiles
-	Src *string `form:"src,omitempty" json:"src,omitempty"`
-}
-
 // DeleteApiPreloadParams defines parameters for DeleteApiPreload.
 type DeleteApiPreloadParams struct {
 	// Src Stream source (name)
@@ -256,32 +150,6 @@ type PutApiPreloadParams struct {
 
 	// Microphone Microphone codecs filter
 	Microphone *string `form:"microphone,omitempty" json:"microphone,omitempty"`
-}
-
-// GetApiRingParams defines parameters for GetApiRing.
-type GetApiRingParams struct {
-	Email        *string `form:"email,omitempty" json:"email,omitempty"`
-	Password     *string `form:"password,omitempty" json:"password,omitempty"`
-	Code         *string `form:"code,omitempty" json:"code,omitempty"`
-	RefreshToken *string `form:"refresh_token,omitempty" json:"refresh_token,omitempty"`
-}
-
-// PostApiRoborockMultipartBody defines parameters for PostApiRoborock.
-type PostApiRoborockMultipartBody struct {
-	Password string `json:"password"`
-	Username string `json:"username"`
-}
-
-// GetApiStreamAsciisrcSrcParams defines parameters for GetApiStreamAsciisrcSrc.
-type GetApiStreamAsciisrcSrcParams struct {
-	// Color Foreground mode (`8`, `256`, `rgb` or ANSI SGR code)
-	Color *string `form:"color,omitempty" json:"color,omitempty"`
-
-	// Back Background mode (`8`, `256`, `rgb` or ANSI SGR code)
-	Back *string `form:"back,omitempty" json:"back,omitempty"`
-
-	// Text Charset preset (empty/default, `block`) or custom characters
-	Text *string `form:"text,omitempty" json:"text,omitempty"`
 }
 
 // GetApiStreamM3u8srcSrcParams defines parameters for GetApiStreamM3u8srcSrc.
@@ -313,12 +181,6 @@ type GetApiStreamMp4srcSrcParams struct {
 	// Filename Download as a file with this name
 	Filename *string `form:"filename,omitempty" json:"filename,omitempty"`
 
-	// Rotate Rotate video (degrees). Supported values: 90, 180, 270.
-	Rotate *GetApiStreamMp4srcSrcParamsRotate `form:"rotate,omitempty" json:"rotate,omitempty"`
-
-	// Scale Scale video in format `width:height`
-	Scale *string `form:"scale,omitempty" json:"scale,omitempty"`
-
 	// Mp4 MP4 codecs filter
 	Mp4 *GetApiStreamMp4srcSrcParamsMp4 `form:"mp4,omitempty" json:"mp4,omitempty"`
 
@@ -328,9 +190,6 @@ type GetApiStreamMp4srcSrcParams struct {
 	// Audio Audio codecs filter
 	Audio *GetApiStreamMp4srcSrcParamsAudio `form:"audio,omitempty" json:"audio,omitempty"`
 }
-
-// GetApiStreamMp4srcSrcParamsRotate defines parameters for GetApiStreamMp4srcSrc.
-type GetApiStreamMp4srcSrcParamsRotate int
 
 // GetApiStreamMp4srcSrcParamsMp4 defines parameters for GetApiStreamMp4srcSrc.
 type GetApiStreamMp4srcSrcParamsMp4 string
@@ -374,34 +233,8 @@ type PutApiStreamsParams struct {
 	Name *string `form:"name,omitempty" json:"name,omitempty"`
 }
 
-// GetApiStreamsDotParams defines parameters for GetApiStreamsDot.
-type GetApiStreamsDotParams struct {
-	// Src Stream name filter. Repeat `src` to include multiple streams.
-	Src *string `form:"src,omitempty" json:"src,omitempty"`
-}
-
-// GetApiTuyaParams defines parameters for GetApiTuya.
-type GetApiTuyaParams struct {
-	// Region Tuya API host (region)
-	Region   string `form:"region" json:"region"`
-	Email    string `form:"email" json:"email"`
-	Password string `form:"password" json:"password"`
-}
-
 // PostApiWebrtcsrcSrcJSONBody defines parameters for PostApiWebrtcsrcSrc.
 type PostApiWebrtcsrcSrcJSONBody interface{}
-
-// GetApiWsParams defines parameters for GetApiWs.
-type GetApiWsParams struct {
-	// Src Stream name (consumer)
-	Src *string `form:"src,omitempty" json:"src,omitempty"`
-
-	// Dst Stream name (producer)
-	Dst *string `form:"dst,omitempty" json:"dst,omitempty"`
-}
-
-// PostApiRoborockMultipartRequestBody defines body for PostApiRoborock for multipart/form-data ContentType.
-type PostApiRoborockMultipartRequestBody PostApiRoborockMultipartBody
 
 // PostApiWebrtcsrcSrcJSONRequestBody defines body for PostApiWebrtcsrcSrc for application/json ContentType.
 type PostApiWebrtcsrcSrcJSONRequestBody PostApiWebrtcsrcSrcJSONBody
@@ -482,9 +315,6 @@ type ClientInterface interface {
 	// GetApi request
 	GetApi(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiAlsa request
-	GetApiAlsa(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetApiConfig request
 	GetApiConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -494,17 +324,11 @@ type ClientInterface interface {
 	// PostApiConfigWithBody request with any body
 	PostApiConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiDiscoveryHomekit request
-	GetApiDiscoveryHomekit(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetApiDvrip request
 	GetApiDvrip(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostApiExit request
 	PostApiExit(ctx context.Context, params *PostApiExitParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostApiFfmpeg request
-	PostApiFfmpeg(ctx context.Context, params *PostApiFfmpegParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiFfmpegDevices request
 	GetApiFfmpegDevices(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -513,52 +337,22 @@ type ClientInterface interface {
 	GetApiFfmpegHardware(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiFrameJpegsrcSrc request
-	GetApiFrameJpegsrcSrc(ctx context.Context, src StreamSrcPath, params *GetApiFrameJpegsrcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetApiFrameJpegsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiFrameMp4srcSrc request
-	GetApiFrameMp4srcSrc(ctx context.Context, src StreamSrcPath, params *GetApiFrameMp4srcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiGopro request
-	GetApiGopro(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetApiFrameMp4srcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiHass request
 	GetApiHass(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiHlsInitMp4idId request
-	GetApiHlsInitMp4idId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiHlsPlaylistM3u8idId request
-	GetApiHlsPlaylistM3u8idId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiHlsSegmentM4sidId request
-	GetApiHlsSegmentM4sidId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiHlsSegmentTsidId request
-	GetApiHlsSegmentTsidId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteApiHomekit request
-	DeleteApiHomekit(ctx context.Context, params *DeleteApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetApiHomekit request
-	GetApiHomekit(ctx context.Context, params *GetApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostApiHomekit request
-	PostApiHomekit(ctx context.Context, params *PostApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiHomekitAccessories request
-	GetApiHomekitAccessories(ctx context.Context, params *GetApiHomekitAccessoriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteApiLog request
-	DeleteApiLog(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiLog request
-	GetApiLog(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetApiHomekit(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiNest request
-	GetApiNest(ctx context.Context, params *GetApiNestParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetApiNest(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiOnvif request
-	GetApiOnvif(ctx context.Context, params *GetApiOnvifParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetApiOnvif(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteApiPreload request
 	DeleteApiPreload(ctx context.Context, params *DeleteApiPreloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -572,32 +366,14 @@ type ClientInterface interface {
 	// PostApiRestart request
 	PostApiRestart(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiRing request
-	GetApiRing(ctx context.Context, params *GetApiRingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetApiRoborock request
 	GetApiRoborock(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostApiRoborockWithBody request with any body
-	PostApiRoborockWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiSchemes request
-	GetApiSchemes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiStack request
 	GetApiStack(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiStreamAacsrcSrc request
-	GetApiStreamAacsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiStreamAsciisrcSrc request
-	GetApiStreamAsciisrcSrc(ctx context.Context, src StreamSrcPath, params *GetApiStreamAsciisrcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// PostApiStreamFlvdstDst request
 	PostApiStreamFlvdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiStreamFlvsrcSrc request
-	GetApiStreamFlvsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetApiStreamM3u8srcSrc request
 	GetApiStreamM3u8srcSrc(ctx context.Context, src StreamSrcPath, params *GetApiStreamM3u8srcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -614,15 +390,6 @@ type ClientInterface interface {
 	// PostApiStreamTsdstDst request
 	PostApiStreamTsdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiStreamTssrcSrc request
-	GetApiStreamTssrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiStreamY4msrcSrc request
-	GetApiStreamY4msrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostApiStreamdstDst request
-	PostApiStreamdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// DeleteApiStreams request
 	DeleteApiStreams(ctx context.Context, params *DeleteApiStreamsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -638,17 +405,8 @@ type ClientInterface interface {
 	// PutApiStreams request
 	PutApiStreams(ctx context.Context, params *PutApiStreamsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiStreamsDot request
-	GetApiStreamsDot(ctx context.Context, params *GetApiStreamsDotParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetApiStreamssrcSrc request
 	GetApiStreamssrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiTuya request
-	GetApiTuya(ctx context.Context, params *GetApiTuyaParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetApiV4l2 request
-	GetApiV4l2(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostApiWebrtcdstDst request
 	PostApiWebrtcdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -670,17 +428,8 @@ type ClientInterface interface {
 	// PostApiWebtorrentsrcSrc request
 	PostApiWebtorrentsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiWs request
-	GetApiWs(ctx context.Context, params *GetApiWsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetOnvif request
 	GetOnvif(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostPairSetupWithBody request with any body
-	PostPairSetupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PostPairVerifyWithBody request with any body
-	PostPairVerifyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetStream request
 	GetStream(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -688,18 +437,6 @@ type ClientInterface interface {
 
 func (c *Client) GetApi(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiAlsa(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiAlsaRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -746,18 +483,6 @@ func (c *Client) PostApiConfigWithBody(ctx context.Context, contentType string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiDiscoveryHomekit(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiDiscoveryHomekitRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) GetApiDvrip(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiDvripRequest(c.Server)
 	if err != nil {
@@ -772,18 +497,6 @@ func (c *Client) GetApiDvrip(ctx context.Context, reqEditors ...RequestEditorFn)
 
 func (c *Client) PostApiExit(ctx context.Context, params *PostApiExitParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiExitRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostApiFfmpeg(ctx context.Context, params *PostApiFfmpegParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiFfmpegRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -818,8 +531,8 @@ func (c *Client) GetApiFfmpegHardware(ctx context.Context, reqEditors ...Request
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiFrameJpegsrcSrc(ctx context.Context, src StreamSrcPath, params *GetApiFrameJpegsrcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiFrameJpegsrcSrcRequest(c.Server, src, params)
+func (c *Client) GetApiFrameJpegsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiFrameJpegsrcSrcRequest(c.Server, src)
 	if err != nil {
 		return nil, err
 	}
@@ -830,20 +543,8 @@ func (c *Client) GetApiFrameJpegsrcSrc(ctx context.Context, src StreamSrcPath, p
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiFrameMp4srcSrc(ctx context.Context, src StreamSrcPath, params *GetApiFrameMp4srcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiFrameMp4srcSrcRequest(c.Server, src, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiGopro(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiGoproRequest(c.Server)
+func (c *Client) GetApiFrameMp4srcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiFrameMp4srcSrcRequest(c.Server, src)
 	if err != nil {
 		return nil, err
 	}
@@ -866,8 +567,8 @@ func (c *Client) GetApiHass(ctx context.Context, reqEditors ...RequestEditorFn) 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiHlsInitMp4idId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHlsInitMp4idIdRequest(c.Server, id)
+func (c *Client) GetApiHomekit(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiHomekitRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -878,8 +579,8 @@ func (c *Client) GetApiHlsInitMp4idId(ctx context.Context, id HlsSessionIdPath, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiHlsPlaylistM3u8idId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHlsPlaylistM3u8idIdRequest(c.Server, id)
+func (c *Client) GetApiNest(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiNestRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -890,116 +591,8 @@ func (c *Client) GetApiHlsPlaylistM3u8idId(ctx context.Context, id HlsSessionIdP
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiHlsSegmentM4sidId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHlsSegmentM4sidIdRequest(c.Server, id)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiHlsSegmentTsidId(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHlsSegmentTsidIdRequest(c.Server, id)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteApiHomekit(ctx context.Context, params *DeleteApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiHomekitRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiHomekit(ctx context.Context, params *GetApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHomekitRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostApiHomekit(ctx context.Context, params *PostApiHomekitParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiHomekitRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiHomekitAccessories(ctx context.Context, params *GetApiHomekitAccessoriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiHomekitAccessoriesRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteApiLog(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiLogRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiLog(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiLogRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiNest(ctx context.Context, params *GetApiNestParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiNestRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiOnvif(ctx context.Context, params *GetApiOnvifParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiOnvifRequest(c.Server, params)
+func (c *Client) GetApiOnvif(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiOnvifRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -1058,44 +651,8 @@ func (c *Client) PostApiRestart(ctx context.Context, reqEditors ...RequestEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiRing(ctx context.Context, params *GetApiRingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiRingRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) GetApiRoborock(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiRoborockRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostApiRoborockWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiRoborockRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiSchemes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiSchemesRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -1118,44 +675,8 @@ func (c *Client) GetApiStack(ctx context.Context, reqEditors ...RequestEditorFn)
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiStreamAacsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamAacsrcSrcRequest(c.Server, src)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiStreamAsciisrcSrc(ctx context.Context, src StreamSrcPath, params *GetApiStreamAsciisrcSrcParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamAsciisrcSrcRequest(c.Server, src, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) PostApiStreamFlvdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiStreamFlvdstDstRequest(c.Server, dst)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiStreamFlvsrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamFlvsrcSrcRequest(c.Server, src)
 	if err != nil {
 		return nil, err
 	}
@@ -1226,42 +747,6 @@ func (c *Client) PostApiStreamTsdstDst(ctx context.Context, dst StreamDstPath, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiStreamTssrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamTssrcSrcRequest(c.Server, src)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiStreamY4msrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamY4msrcSrcRequest(c.Server, src)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostApiStreamdstDst(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiStreamdstDstRequest(c.Server, dst)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) DeleteApiStreams(ctx context.Context, params *DeleteApiStreamsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteApiStreamsRequest(c.Server, params)
 	if err != nil {
@@ -1322,44 +807,8 @@ func (c *Client) PutApiStreams(ctx context.Context, params *PutApiStreamsParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiStreamsDot(ctx context.Context, params *GetApiStreamsDotParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiStreamsDotRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) GetApiStreamssrcSrc(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiStreamssrcSrcRequest(c.Server, src)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiTuya(ctx context.Context, params *GetApiTuyaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiTuyaRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetApiV4l2(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV4l2Request(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -1454,44 +903,8 @@ func (c *Client) PostApiWebtorrentsrcSrc(ctx context.Context, src StreamSrcPath,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiWs(ctx context.Context, params *GetApiWsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiWsRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) GetOnvif(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetOnvifRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostPairSetupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostPairSetupRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PostPairVerifyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostPairVerifyRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1524,33 +937,6 @@ func NewGetApiRequest(server string) (*http.Request, error) {
 	}
 
 	operationPath := fmt.Sprintf("/api")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiAlsaRequest generates requests for GetApiAlsa
-func NewGetApiAlsaRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/alsa")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1653,33 +1039,6 @@ func NewPostApiConfigRequestWithBody(server string, contentType string, body io.
 	return req, nil
 }
 
-// NewGetApiDiscoveryHomekitRequest generates requests for GetApiDiscoveryHomekit
-func NewGetApiDiscoveryHomekitRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/discovery/homekit")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetApiDvripRequest generates requests for GetApiDvrip
 func NewGetApiDvripRequest(server string) (*http.Request, error) {
 	var err error
@@ -1732,115 +1091,6 @@ func NewPostApiExitRequest(server string, params *PostApiExitParams) (*http.Requ
 		if params.Code != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "code", runtime.ParamLocationQuery, *params.Code); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewPostApiFfmpegRequest generates requests for PostApiFfmpeg
-func NewPostApiFfmpegRequest(server string, params *PostApiFfmpegParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/ffmpeg")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "dst", runtime.ParamLocationQuery, params.Dst); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if params.File != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "file", runtime.ParamLocationQuery, *params.File); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Live != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "live", runtime.ParamLocationQuery, *params.Live); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Text != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "text", runtime.ParamLocationQuery, *params.Text); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Voice != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "voice", runtime.ParamLocationQuery, *params.Voice); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -1920,7 +1170,7 @@ func NewGetApiFfmpegHardwareRequest(server string) (*http.Request, error) {
 }
 
 // NewGetApiFrameJpegsrcSrcRequest generates requests for GetApiFrameJpegsrcSrc
-func NewGetApiFrameJpegsrcSrcRequest(server string, src StreamSrcPath, params *GetApiFrameJpegsrcSrcParams) (*http.Request, error) {
+func NewGetApiFrameJpegsrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1945,92 +1195,6 @@ func NewGetApiFrameJpegsrcSrcRequest(server string, src StreamSrcPath, params *G
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Name != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, *params.Name); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Width != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "width", runtime.ParamLocationQuery, *params.Width); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Height != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "height", runtime.ParamLocationQuery, *params.Height); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Rotate != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rotate", runtime.ParamLocationQuery, *params.Rotate); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Hardware != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "hardware", runtime.ParamLocationQuery, *params.Hardware); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
@@ -2040,7 +1204,7 @@ func NewGetApiFrameJpegsrcSrcRequest(server string, src StreamSrcPath, params *G
 }
 
 // NewGetApiFrameMp4srcSrcRequest generates requests for GetApiFrameMp4srcSrc
-func NewGetApiFrameMp4srcSrcRequest(server string, src StreamSrcPath, params *GetApiFrameMp4srcSrcParams) (*http.Request, error) {
+func NewGetApiFrameMp4srcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2056,55 +1220,6 @@ func NewGetApiFrameMp4srcSrcRequest(server string, src StreamSrcPath, params *Ge
 	}
 
 	operationPath := fmt.Sprintf("/api/frame.mp4?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Filename != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filename", runtime.ParamLocationQuery, *params.Filename); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiGoproRequest generates requests for GetApiGopro
-func NewGetApiGoproRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/gopro")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -2149,189 +1264,8 @@ func NewGetApiHassRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiHlsInitMp4idIdRequest generates requests for GetApiHlsInitMp4idId
-func NewGetApiHlsInitMp4idIdRequest(server string, id HlsSessionIdPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hls/init.mp4?id=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiHlsPlaylistM3u8idIdRequest generates requests for GetApiHlsPlaylistM3u8idId
-func NewGetApiHlsPlaylistM3u8idIdRequest(server string, id HlsSessionIdPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hls/playlist.m3u8?id=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiHlsSegmentM4sidIdRequest generates requests for GetApiHlsSegmentM4sidId
-func NewGetApiHlsSegmentM4sidIdRequest(server string, id HlsSessionIdPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hls/segment.m4s?id=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiHlsSegmentTsidIdRequest generates requests for GetApiHlsSegmentTsidId
-func NewGetApiHlsSegmentTsidIdRequest(server string, id HlsSessionIdPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hls/segment.ts?id=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewDeleteApiHomekitRequest generates requests for DeleteApiHomekit
-func NewDeleteApiHomekitRequest(server string, params *DeleteApiHomekitParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/homekit")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, params.Id); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetApiHomekitRequest generates requests for GetApiHomekit
-func NewGetApiHomekitRequest(server string, params *GetApiHomekitParams) (*http.Request, error) {
+func NewGetApiHomekitRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2340,196 +1274,6 @@ func NewGetApiHomekitRequest(server string, params *GetApiHomekitParams) (*http.
 	}
 
 	operationPath := fmt.Sprintf("/api/homekit")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Id != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, *params.Id); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewPostApiHomekitRequest generates requests for PostApiHomekit
-func NewPostApiHomekitRequest(server string, params *PostApiHomekitParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/homekit")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, params.Id); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "src", runtime.ParamLocationQuery, params.Src); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pin", runtime.ParamLocationQuery, params.Pin); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiHomekitAccessoriesRequest generates requests for GetApiHomekitAccessories
-func NewGetApiHomekitAccessoriesRequest(server string, params *GetApiHomekitAccessoriesParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/homekit/accessories")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, params.Id); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewDeleteApiLogRequest generates requests for DeleteApiLog
-func NewDeleteApiLogRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/log")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiLogRequest generates requests for GetApiLog
-func NewGetApiLogRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/log")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -2548,7 +1292,7 @@ func NewGetApiLogRequest(server string) (*http.Request, error) {
 }
 
 // NewGetApiNestRequest generates requests for GetApiNest
-func NewGetApiNestRequest(server string, params *GetApiNestParams) (*http.Request, error) {
+func NewGetApiNestRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2566,60 +1310,6 @@ func NewGetApiNestRequest(server string, params *GetApiNestParams) (*http.Reques
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "client_id", runtime.ParamLocationQuery, params.ClientId); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "client_secret", runtime.ParamLocationQuery, params.ClientSecret); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "refresh_token", runtime.ParamLocationQuery, params.RefreshToken); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "project_id", runtime.ParamLocationQuery, params.ProjectId); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
@@ -2629,7 +1319,7 @@ func NewGetApiNestRequest(server string, params *GetApiNestParams) (*http.Reques
 }
 
 // NewGetApiOnvifRequest generates requests for GetApiOnvif
-func NewGetApiOnvifRequest(server string, params *GetApiOnvifParams) (*http.Request, error) {
+func NewGetApiOnvifRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2645,28 +1335,6 @@ func NewGetApiOnvifRequest(server string, params *GetApiOnvifParams) (*http.Requ
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Src != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "src", runtime.ParamLocationQuery, *params.Src); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -2869,103 +1537,6 @@ func NewPostApiRestartRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiRingRequest generates requests for GetApiRing
-func NewGetApiRingRequest(server string, params *GetApiRingParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/ring")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Email != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "email", runtime.ParamLocationQuery, *params.Email); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Password != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "password", runtime.ParamLocationQuery, *params.Password); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Code != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "code", runtime.ParamLocationQuery, *params.Code); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.RefreshToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "refresh_token", runtime.ParamLocationQuery, *params.RefreshToken); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetApiRoborockRequest generates requests for GetApiRoborock
 func NewGetApiRoborockRequest(server string) (*http.Request, error) {
 	var err error
@@ -2976,62 +1547,6 @@ func NewGetApiRoborockRequest(server string) (*http.Request, error) {
 	}
 
 	operationPath := fmt.Sprintf("/api/roborock")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewPostApiRoborockRequestWithBody generates requests for PostApiRoborock with any type of body
-func NewPostApiRoborockRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/roborock")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGetApiSchemesRequest generates requests for GetApiSchemes
-func NewGetApiSchemesRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/schemes")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -3076,128 +1591,6 @@ func NewGetApiStackRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiStreamAacsrcSrcRequest generates requests for GetApiStreamAacsrcSrc
-func NewGetApiStreamAacsrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "src", runtime.ParamLocationPath, src)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream.aac?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiStreamAsciisrcSrcRequest generates requests for GetApiStreamAsciisrcSrc
-func NewGetApiStreamAsciisrcSrcRequest(server string, src StreamSrcPath, params *GetApiStreamAsciisrcSrcParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "src", runtime.ParamLocationPath, src)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream.ascii?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Color != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "color", runtime.ParamLocationQuery, *params.Color); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Back != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "back", runtime.ParamLocationQuery, *params.Back); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Text != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "text", runtime.ParamLocationQuery, *params.Text); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewPostApiStreamFlvdstDstRequest generates requests for PostApiStreamFlvdstDst
 func NewPostApiStreamFlvdstDstRequest(server string, dst StreamDstPath) (*http.Request, error) {
 	var err error
@@ -3225,40 +1618,6 @@ func NewPostApiStreamFlvdstDstRequest(server string, dst StreamDstPath) (*http.R
 	}
 
 	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiStreamFlvsrcSrcRequest generates requests for GetApiStreamFlvsrcSrc
-func NewGetApiStreamFlvsrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "src", runtime.ParamLocationPath, src)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream.flv?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3483,38 +1842,6 @@ func NewGetApiStreamMp4srcSrcRequest(server string, src StreamSrcPath, params *G
 
 		}
 
-		if params.Rotate != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rotate", runtime.ParamLocationQuery, *params.Rotate); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Scale != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "scale", runtime.ParamLocationQuery, *params.Scale); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
 		if params.Mp4 != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mp4", runtime.ParamLocationQuery, *params.Mp4); err != nil {
@@ -3591,108 +1918,6 @@ func NewPostApiStreamTsdstDstRequest(server string, dst StreamDstPath) (*http.Re
 	}
 
 	operationPath := fmt.Sprintf("/api/stream.ts?dst=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiStreamTssrcSrcRequest generates requests for GetApiStreamTssrcSrc
-func NewGetApiStreamTssrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "src", runtime.ParamLocationPath, src)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream.ts?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiStreamY4msrcSrcRequest generates requests for GetApiStreamY4msrcSrc
-func NewGetApiStreamY4msrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "src", runtime.ParamLocationPath, src)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream.y4m?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewPostApiStreamdstDstRequest generates requests for PostApiStreamdstDst
-func NewPostApiStreamdstDstRequest(server string, dst StreamDstPath) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "dst", runtime.ParamLocationPath, dst)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/stream?dst=%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -3957,55 +2182,6 @@ func NewPutApiStreamsRequest(server string, params *PutApiStreamsParams) (*http.
 	return req, nil
 }
 
-// NewGetApiStreamsDotRequest generates requests for GetApiStreamsDot
-func NewGetApiStreamsDotRequest(server string, params *GetApiStreamsDotParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/streams.dot")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Src != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "src", runtime.ParamLocationQuery, *params.Src); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetApiStreamssrcSrcRequest generates requests for GetApiStreamssrcSrc
 func NewGetApiStreamssrcSrcRequest(server string, src StreamSrcPath) (*http.Request, error) {
 	var err error
@@ -4023,102 +2199,6 @@ func NewGetApiStreamssrcSrcRequest(server string, src StreamSrcPath) (*http.Requ
 	}
 
 	operationPath := fmt.Sprintf("/api/streams?src=%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiTuyaRequest generates requests for GetApiTuya
-func NewGetApiTuyaRequest(server string, params *GetApiTuyaParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/tuya")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "region", runtime.ParamLocationQuery, params.Region); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "email", runtime.ParamLocationQuery, params.Email); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "password", runtime.ParamLocationQuery, params.Password); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetApiV4l2Request generates requests for GetApiV4l2
-func NewGetApiV4l2Request(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/v4l2")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -4346,71 +2426,6 @@ func NewPostApiWebtorrentsrcSrcRequest(server string, src StreamSrcPath) (*http.
 	return req, nil
 }
 
-// NewGetApiWsRequest generates requests for GetApiWs
-func NewGetApiWsRequest(server string, params *GetApiWsParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/ws")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Src != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "src", runtime.ParamLocationQuery, *params.Src); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Dst != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "dst", runtime.ParamLocationQuery, *params.Dst); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetOnvifRequest generates requests for GetOnvif
 func NewGetOnvifRequest(server string) (*http.Request, error) {
 	var err error
@@ -4434,64 +2449,6 @@ func NewGetOnvifRequest(server string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	return req, nil
-}
-
-// NewPostPairSetupRequestWithBody generates requests for PostPairSetup with any type of body
-func NewPostPairSetupRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/pair-setup")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewPostPairVerifyRequestWithBody generates requests for PostPairVerify with any type of body
-func NewPostPairVerifyRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/pair-verify")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -4569,9 +2526,6 @@ type ClientWithResponsesInterface interface {
 	// GetApiWithResponse request
 	GetApiWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiResponse, error)
 
-	// GetApiAlsaWithResponse request
-	GetApiAlsaWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiAlsaResponse, error)
-
 	// GetApiConfigWithResponse request
 	GetApiConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiConfigResponse, error)
 
@@ -4581,17 +2535,11 @@ type ClientWithResponsesInterface interface {
 	// PostApiConfigWithBodyWithResponse request with any body
 	PostApiConfigWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiConfigResponse, error)
 
-	// GetApiDiscoveryHomekitWithResponse request
-	GetApiDiscoveryHomekitWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiDiscoveryHomekitResponse, error)
-
 	// GetApiDvripWithResponse request
 	GetApiDvripWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiDvripResponse, error)
 
 	// PostApiExitWithResponse request
 	PostApiExitWithResponse(ctx context.Context, params *PostApiExitParams, reqEditors ...RequestEditorFn) (*PostApiExitResponse, error)
-
-	// PostApiFfmpegWithResponse request
-	PostApiFfmpegWithResponse(ctx context.Context, params *PostApiFfmpegParams, reqEditors ...RequestEditorFn) (*PostApiFfmpegResponse, error)
 
 	// GetApiFfmpegDevicesWithResponse request
 	GetApiFfmpegDevicesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiFfmpegDevicesResponse, error)
@@ -4600,52 +2548,22 @@ type ClientWithResponsesInterface interface {
 	GetApiFfmpegHardwareWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiFfmpegHardwareResponse, error)
 
 	// GetApiFrameJpegsrcSrcWithResponse request
-	GetApiFrameJpegsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiFrameJpegsrcSrcParams, reqEditors ...RequestEditorFn) (*GetApiFrameJpegsrcSrcResponse, error)
+	GetApiFrameJpegsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiFrameJpegsrcSrcResponse, error)
 
 	// GetApiFrameMp4srcSrcWithResponse request
-	GetApiFrameMp4srcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiFrameMp4srcSrcParams, reqEditors ...RequestEditorFn) (*GetApiFrameMp4srcSrcResponse, error)
-
-	// GetApiGoproWithResponse request
-	GetApiGoproWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiGoproResponse, error)
+	GetApiFrameMp4srcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiFrameMp4srcSrcResponse, error)
 
 	// GetApiHassWithResponse request
 	GetApiHassWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiHassResponse, error)
 
-	// GetApiHlsInitMp4idIdWithResponse request
-	GetApiHlsInitMp4idIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsInitMp4idIdResponse, error)
-
-	// GetApiHlsPlaylistM3u8idIdWithResponse request
-	GetApiHlsPlaylistM3u8idIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsPlaylistM3u8idIdResponse, error)
-
-	// GetApiHlsSegmentM4sidIdWithResponse request
-	GetApiHlsSegmentM4sidIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsSegmentM4sidIdResponse, error)
-
-	// GetApiHlsSegmentTsidIdWithResponse request
-	GetApiHlsSegmentTsidIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsSegmentTsidIdResponse, error)
-
-	// DeleteApiHomekitWithResponse request
-	DeleteApiHomekitWithResponse(ctx context.Context, params *DeleteApiHomekitParams, reqEditors ...RequestEditorFn) (*DeleteApiHomekitResponse, error)
-
 	// GetApiHomekitWithResponse request
-	GetApiHomekitWithResponse(ctx context.Context, params *GetApiHomekitParams, reqEditors ...RequestEditorFn) (*GetApiHomekitResponse, error)
-
-	// PostApiHomekitWithResponse request
-	PostApiHomekitWithResponse(ctx context.Context, params *PostApiHomekitParams, reqEditors ...RequestEditorFn) (*PostApiHomekitResponse, error)
-
-	// GetApiHomekitAccessoriesWithResponse request
-	GetApiHomekitAccessoriesWithResponse(ctx context.Context, params *GetApiHomekitAccessoriesParams, reqEditors ...RequestEditorFn) (*GetApiHomekitAccessoriesResponse, error)
-
-	// DeleteApiLogWithResponse request
-	DeleteApiLogWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DeleteApiLogResponse, error)
-
-	// GetApiLogWithResponse request
-	GetApiLogWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiLogResponse, error)
+	GetApiHomekitWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiHomekitResponse, error)
 
 	// GetApiNestWithResponse request
-	GetApiNestWithResponse(ctx context.Context, params *GetApiNestParams, reqEditors ...RequestEditorFn) (*GetApiNestResponse, error)
+	GetApiNestWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiNestResponse, error)
 
 	// GetApiOnvifWithResponse request
-	GetApiOnvifWithResponse(ctx context.Context, params *GetApiOnvifParams, reqEditors ...RequestEditorFn) (*GetApiOnvifResponse, error)
+	GetApiOnvifWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiOnvifResponse, error)
 
 	// DeleteApiPreloadWithResponse request
 	DeleteApiPreloadWithResponse(ctx context.Context, params *DeleteApiPreloadParams, reqEditors ...RequestEditorFn) (*DeleteApiPreloadResponse, error)
@@ -4659,32 +2577,14 @@ type ClientWithResponsesInterface interface {
 	// PostApiRestartWithResponse request
 	PostApiRestartWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostApiRestartResponse, error)
 
-	// GetApiRingWithResponse request
-	GetApiRingWithResponse(ctx context.Context, params *GetApiRingParams, reqEditors ...RequestEditorFn) (*GetApiRingResponse, error)
-
 	// GetApiRoborockWithResponse request
 	GetApiRoborockWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiRoborockResponse, error)
-
-	// PostApiRoborockWithBodyWithResponse request with any body
-	PostApiRoborockWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiRoborockResponse, error)
-
-	// GetApiSchemesWithResponse request
-	GetApiSchemesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiSchemesResponse, error)
 
 	// GetApiStackWithResponse request
 	GetApiStackWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiStackResponse, error)
 
-	// GetApiStreamAacsrcSrcWithResponse request
-	GetApiStreamAacsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamAacsrcSrcResponse, error)
-
-	// GetApiStreamAsciisrcSrcWithResponse request
-	GetApiStreamAsciisrcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiStreamAsciisrcSrcParams, reqEditors ...RequestEditorFn) (*GetApiStreamAsciisrcSrcResponse, error)
-
 	// PostApiStreamFlvdstDstWithResponse request
 	PostApiStreamFlvdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiStreamFlvdstDstResponse, error)
-
-	// GetApiStreamFlvsrcSrcWithResponse request
-	GetApiStreamFlvsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamFlvsrcSrcResponse, error)
 
 	// GetApiStreamM3u8srcSrcWithResponse request
 	GetApiStreamM3u8srcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiStreamM3u8srcSrcParams, reqEditors ...RequestEditorFn) (*GetApiStreamM3u8srcSrcResponse, error)
@@ -4701,15 +2601,6 @@ type ClientWithResponsesInterface interface {
 	// PostApiStreamTsdstDstWithResponse request
 	PostApiStreamTsdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiStreamTsdstDstResponse, error)
 
-	// GetApiStreamTssrcSrcWithResponse request
-	GetApiStreamTssrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamTssrcSrcResponse, error)
-
-	// GetApiStreamY4msrcSrcWithResponse request
-	GetApiStreamY4msrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamY4msrcSrcResponse, error)
-
-	// PostApiStreamdstDstWithResponse request
-	PostApiStreamdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiStreamdstDstResponse, error)
-
 	// DeleteApiStreamsWithResponse request
 	DeleteApiStreamsWithResponse(ctx context.Context, params *DeleteApiStreamsParams, reqEditors ...RequestEditorFn) (*DeleteApiStreamsResponse, error)
 
@@ -4725,17 +2616,8 @@ type ClientWithResponsesInterface interface {
 	// PutApiStreamsWithResponse request
 	PutApiStreamsWithResponse(ctx context.Context, params *PutApiStreamsParams, reqEditors ...RequestEditorFn) (*PutApiStreamsResponse, error)
 
-	// GetApiStreamsDotWithResponse request
-	GetApiStreamsDotWithResponse(ctx context.Context, params *GetApiStreamsDotParams, reqEditors ...RequestEditorFn) (*GetApiStreamsDotResponse, error)
-
 	// GetApiStreamssrcSrcWithResponse request
 	GetApiStreamssrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamssrcSrcResponse, error)
-
-	// GetApiTuyaWithResponse request
-	GetApiTuyaWithResponse(ctx context.Context, params *GetApiTuyaParams, reqEditors ...RequestEditorFn) (*GetApiTuyaResponse, error)
-
-	// GetApiV4l2WithResponse request
-	GetApiV4l2WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV4l2Response, error)
 
 	// PostApiWebrtcdstDstWithResponse request
 	PostApiWebrtcdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiWebrtcdstDstResponse, error)
@@ -4757,17 +2639,8 @@ type ClientWithResponsesInterface interface {
 	// PostApiWebtorrentsrcSrcWithResponse request
 	PostApiWebtorrentsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*PostApiWebtorrentsrcSrcResponse, error)
 
-	// GetApiWsWithResponse request
-	GetApiWsWithResponse(ctx context.Context, params *GetApiWsParams, reqEditors ...RequestEditorFn) (*GetApiWsResponse, error)
-
 	// GetOnvifWithResponse request
 	GetOnvifWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetOnvifResponse, error)
-
-	// PostPairSetupWithBodyWithResponse request with any body
-	PostPairSetupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostPairSetupResponse, error)
-
-	// PostPairVerifyWithBodyWithResponse request with any body
-	PostPairVerifyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostPairVerifyResponse, error)
 
 	// GetStreamWithResponse request
 	GetStreamWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetStreamResponse, error)
@@ -4776,15 +2649,6 @@ type ClientWithResponsesInterface interface {
 type GetApiResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		ConfigPath *string `json:"config_path,omitempty"`
-		Host       *string `json:"host,omitempty"`
-		Rtsp       *struct {
-			DefaultQuery *string `json:"default_query,omitempty"`
-			Listen       *string `json:"listen,omitempty"`
-		} `json:"rtsp,omitempty"`
-		Version *string `json:"version,omitempty"`
-	}
 }
 
 // Status returns HTTPResponse.Status
@@ -4797,27 +2661,6 @@ func (r GetApiResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetApiResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiAlsaResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiAlsaResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiAlsaResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -4887,27 +2730,6 @@ func (r PostApiConfigResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiDiscoveryHomekitResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiDiscoveryHomekitResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiDiscoveryHomekitResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetApiDvripResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -4944,27 +2766,6 @@ func (r PostApiExitResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r PostApiExitResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostApiFfmpegResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostApiFfmpegResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostApiFfmpegResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5055,27 +2856,6 @@ func (r GetApiFrameMp4srcSrcResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiGoproResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiGoproResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiGoproResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetApiHassResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -5097,111 +2877,6 @@ func (r GetApiHassResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiHlsInitMp4idIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiHlsInitMp4idIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiHlsInitMp4idIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiHlsPlaylistM3u8idIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiHlsPlaylistM3u8idIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiHlsPlaylistM3u8idIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiHlsSegmentM4sidIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiHlsSegmentM4sidIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiHlsSegmentM4sidIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiHlsSegmentTsidIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiHlsSegmentTsidIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiHlsSegmentTsidIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type DeleteApiHomekitResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteApiHomekitResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiHomekitResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetApiHomekitResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -5217,90 +2892,6 @@ func (r GetApiHomekitResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetApiHomekitResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostApiHomekitResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostApiHomekitResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostApiHomekitResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiHomekitAccessoriesResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiHomekitAccessoriesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiHomekitAccessoriesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type DeleteApiLogResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteApiLogResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiLogResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiLogResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiLogResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiLogResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5373,10 +2964,6 @@ func (r DeleteApiPreloadResponse) StatusCode() int {
 type GetApiPreloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]struct {
-		Consumer *map[string]interface{} `json:"consumer,omitempty"`
-		Query    *string                 `json:"query,omitempty"`
-	}
 }
 
 // Status returns HTTPResponse.Status
@@ -5437,27 +3024,6 @@ func (r PostApiRestartResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiRingResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiRingResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiRingResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetApiRoborockResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -5473,49 +3039,6 @@ func (r GetApiRoborockResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetApiRoborockResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostApiRoborockResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostApiRoborockResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostApiRoborockResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiSchemesResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *[]string
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiSchemesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiSchemesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5543,48 +3066,6 @@ func (r GetApiStackResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiStreamAacsrcSrcResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamAacsrcSrcResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamAacsrcSrcResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiStreamAsciisrcSrcResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamAsciisrcSrcResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamAsciisrcSrcResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type PostApiStreamFlvdstDstResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -5600,27 +3081,6 @@ func (r PostApiStreamFlvdstDstResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r PostApiStreamFlvdstDstResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiStreamFlvsrcSrcResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamFlvsrcSrcResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamFlvsrcSrcResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5732,69 +3192,6 @@ func (r PostApiStreamTsdstDstResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiStreamTssrcSrcResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamTssrcSrcResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamTssrcSrcResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiStreamY4msrcSrcResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamY4msrcSrcResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamY4msrcSrcResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostApiStreamdstDstResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostApiStreamdstDstResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostApiStreamdstDstResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type DeleteApiStreamsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -5819,10 +3216,6 @@ func (r DeleteApiStreamsResponse) StatusCode() int {
 type GetApiStreamsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]struct {
-		Consumers *[]interface{} `json:"consumers,omitempty"`
-		Producers *[]interface{} `json:"producers,omitempty"`
-	}
 }
 
 // Status returns HTTPResponse.Status
@@ -5904,34 +3297,9 @@ func (r PutApiStreamsResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiStreamsDotResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiStreamsDotResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiStreamsDotResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetApiStreamssrcSrcResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]struct {
-		Consumers *[]map[string]interface{} `json:"consumers,omitempty"`
-		Producers *[]map[string]interface{} `json:"producers,omitempty"`
-	}
 }
 
 // Status returns HTTPResponse.Status
@@ -5944,48 +3312,6 @@ func (r GetApiStreamssrcSrcResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetApiStreamssrcSrcResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiTuyaResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiTuyaResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiTuyaResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiV4l2Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiV4l2Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV4l2Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6118,27 +3444,6 @@ func (r PostApiWebtorrentsrcSrcResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiWsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r GetApiWsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetApiWsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetOnvifResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -6154,48 +3459,6 @@ func (r GetOnvifResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetOnvifResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostPairSetupResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostPairSetupResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostPairSetupResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PostPairVerifyResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-}
-
-// Status returns HTTPResponse.Status
-func (r PostPairVerifyResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PostPairVerifyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6232,15 +3495,6 @@ func (c *ClientWithResponses) GetApiWithResponse(ctx context.Context, reqEditors
 	return ParseGetApiResponse(rsp)
 }
 
-// GetApiAlsaWithResponse request returning *GetApiAlsaResponse
-func (c *ClientWithResponses) GetApiAlsaWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiAlsaResponse, error) {
-	rsp, err := c.GetApiAlsa(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiAlsaResponse(rsp)
-}
-
 // GetApiConfigWithResponse request returning *GetApiConfigResponse
 func (c *ClientWithResponses) GetApiConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiConfigResponse, error) {
 	rsp, err := c.GetApiConfig(ctx, reqEditors...)
@@ -6268,15 +3522,6 @@ func (c *ClientWithResponses) PostApiConfigWithBodyWithResponse(ctx context.Cont
 	return ParsePostApiConfigResponse(rsp)
 }
 
-// GetApiDiscoveryHomekitWithResponse request returning *GetApiDiscoveryHomekitResponse
-func (c *ClientWithResponses) GetApiDiscoveryHomekitWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiDiscoveryHomekitResponse, error) {
-	rsp, err := c.GetApiDiscoveryHomekit(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiDiscoveryHomekitResponse(rsp)
-}
-
 // GetApiDvripWithResponse request returning *GetApiDvripResponse
 func (c *ClientWithResponses) GetApiDvripWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiDvripResponse, error) {
 	rsp, err := c.GetApiDvrip(ctx, reqEditors...)
@@ -6293,15 +3538,6 @@ func (c *ClientWithResponses) PostApiExitWithResponse(ctx context.Context, param
 		return nil, err
 	}
 	return ParsePostApiExitResponse(rsp)
-}
-
-// PostApiFfmpegWithResponse request returning *PostApiFfmpegResponse
-func (c *ClientWithResponses) PostApiFfmpegWithResponse(ctx context.Context, params *PostApiFfmpegParams, reqEditors ...RequestEditorFn) (*PostApiFfmpegResponse, error) {
-	rsp, err := c.PostApiFfmpeg(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostApiFfmpegResponse(rsp)
 }
 
 // GetApiFfmpegDevicesWithResponse request returning *GetApiFfmpegDevicesResponse
@@ -6323,8 +3559,8 @@ func (c *ClientWithResponses) GetApiFfmpegHardwareWithResponse(ctx context.Conte
 }
 
 // GetApiFrameJpegsrcSrcWithResponse request returning *GetApiFrameJpegsrcSrcResponse
-func (c *ClientWithResponses) GetApiFrameJpegsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiFrameJpegsrcSrcParams, reqEditors ...RequestEditorFn) (*GetApiFrameJpegsrcSrcResponse, error) {
-	rsp, err := c.GetApiFrameJpegsrcSrc(ctx, src, params, reqEditors...)
+func (c *ClientWithResponses) GetApiFrameJpegsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiFrameJpegsrcSrcResponse, error) {
+	rsp, err := c.GetApiFrameJpegsrcSrc(ctx, src, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -6332,21 +3568,12 @@ func (c *ClientWithResponses) GetApiFrameJpegsrcSrcWithResponse(ctx context.Cont
 }
 
 // GetApiFrameMp4srcSrcWithResponse request returning *GetApiFrameMp4srcSrcResponse
-func (c *ClientWithResponses) GetApiFrameMp4srcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiFrameMp4srcSrcParams, reqEditors ...RequestEditorFn) (*GetApiFrameMp4srcSrcResponse, error) {
-	rsp, err := c.GetApiFrameMp4srcSrc(ctx, src, params, reqEditors...)
+func (c *ClientWithResponses) GetApiFrameMp4srcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiFrameMp4srcSrcResponse, error) {
+	rsp, err := c.GetApiFrameMp4srcSrc(ctx, src, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetApiFrameMp4srcSrcResponse(rsp)
-}
-
-// GetApiGoproWithResponse request returning *GetApiGoproResponse
-func (c *ClientWithResponses) GetApiGoproWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiGoproResponse, error) {
-	rsp, err := c.GetApiGopro(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiGoproResponse(rsp)
 }
 
 // GetApiHassWithResponse request returning *GetApiHassResponse
@@ -6358,99 +3585,18 @@ func (c *ClientWithResponses) GetApiHassWithResponse(ctx context.Context, reqEdi
 	return ParseGetApiHassResponse(rsp)
 }
 
-// GetApiHlsInitMp4idIdWithResponse request returning *GetApiHlsInitMp4idIdResponse
-func (c *ClientWithResponses) GetApiHlsInitMp4idIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsInitMp4idIdResponse, error) {
-	rsp, err := c.GetApiHlsInitMp4idId(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiHlsInitMp4idIdResponse(rsp)
-}
-
-// GetApiHlsPlaylistM3u8idIdWithResponse request returning *GetApiHlsPlaylistM3u8idIdResponse
-func (c *ClientWithResponses) GetApiHlsPlaylistM3u8idIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsPlaylistM3u8idIdResponse, error) {
-	rsp, err := c.GetApiHlsPlaylistM3u8idId(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiHlsPlaylistM3u8idIdResponse(rsp)
-}
-
-// GetApiHlsSegmentM4sidIdWithResponse request returning *GetApiHlsSegmentM4sidIdResponse
-func (c *ClientWithResponses) GetApiHlsSegmentM4sidIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsSegmentM4sidIdResponse, error) {
-	rsp, err := c.GetApiHlsSegmentM4sidId(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiHlsSegmentM4sidIdResponse(rsp)
-}
-
-// GetApiHlsSegmentTsidIdWithResponse request returning *GetApiHlsSegmentTsidIdResponse
-func (c *ClientWithResponses) GetApiHlsSegmentTsidIdWithResponse(ctx context.Context, id HlsSessionIdPath, reqEditors ...RequestEditorFn) (*GetApiHlsSegmentTsidIdResponse, error) {
-	rsp, err := c.GetApiHlsSegmentTsidId(ctx, id, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiHlsSegmentTsidIdResponse(rsp)
-}
-
-// DeleteApiHomekitWithResponse request returning *DeleteApiHomekitResponse
-func (c *ClientWithResponses) DeleteApiHomekitWithResponse(ctx context.Context, params *DeleteApiHomekitParams, reqEditors ...RequestEditorFn) (*DeleteApiHomekitResponse, error) {
-	rsp, err := c.DeleteApiHomekit(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteApiHomekitResponse(rsp)
-}
-
 // GetApiHomekitWithResponse request returning *GetApiHomekitResponse
-func (c *ClientWithResponses) GetApiHomekitWithResponse(ctx context.Context, params *GetApiHomekitParams, reqEditors ...RequestEditorFn) (*GetApiHomekitResponse, error) {
-	rsp, err := c.GetApiHomekit(ctx, params, reqEditors...)
+func (c *ClientWithResponses) GetApiHomekitWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiHomekitResponse, error) {
+	rsp, err := c.GetApiHomekit(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetApiHomekitResponse(rsp)
 }
 
-// PostApiHomekitWithResponse request returning *PostApiHomekitResponse
-func (c *ClientWithResponses) PostApiHomekitWithResponse(ctx context.Context, params *PostApiHomekitParams, reqEditors ...RequestEditorFn) (*PostApiHomekitResponse, error) {
-	rsp, err := c.PostApiHomekit(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostApiHomekitResponse(rsp)
-}
-
-// GetApiHomekitAccessoriesWithResponse request returning *GetApiHomekitAccessoriesResponse
-func (c *ClientWithResponses) GetApiHomekitAccessoriesWithResponse(ctx context.Context, params *GetApiHomekitAccessoriesParams, reqEditors ...RequestEditorFn) (*GetApiHomekitAccessoriesResponse, error) {
-	rsp, err := c.GetApiHomekitAccessories(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiHomekitAccessoriesResponse(rsp)
-}
-
-// DeleteApiLogWithResponse request returning *DeleteApiLogResponse
-func (c *ClientWithResponses) DeleteApiLogWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DeleteApiLogResponse, error) {
-	rsp, err := c.DeleteApiLog(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteApiLogResponse(rsp)
-}
-
-// GetApiLogWithResponse request returning *GetApiLogResponse
-func (c *ClientWithResponses) GetApiLogWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiLogResponse, error) {
-	rsp, err := c.GetApiLog(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiLogResponse(rsp)
-}
-
 // GetApiNestWithResponse request returning *GetApiNestResponse
-func (c *ClientWithResponses) GetApiNestWithResponse(ctx context.Context, params *GetApiNestParams, reqEditors ...RequestEditorFn) (*GetApiNestResponse, error) {
-	rsp, err := c.GetApiNest(ctx, params, reqEditors...)
+func (c *ClientWithResponses) GetApiNestWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiNestResponse, error) {
+	rsp, err := c.GetApiNest(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -6458,8 +3604,8 @@ func (c *ClientWithResponses) GetApiNestWithResponse(ctx context.Context, params
 }
 
 // GetApiOnvifWithResponse request returning *GetApiOnvifResponse
-func (c *ClientWithResponses) GetApiOnvifWithResponse(ctx context.Context, params *GetApiOnvifParams, reqEditors ...RequestEditorFn) (*GetApiOnvifResponse, error) {
-	rsp, err := c.GetApiOnvif(ctx, params, reqEditors...)
+func (c *ClientWithResponses) GetApiOnvifWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiOnvifResponse, error) {
+	rsp, err := c.GetApiOnvif(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -6502,15 +3648,6 @@ func (c *ClientWithResponses) PostApiRestartWithResponse(ctx context.Context, re
 	return ParsePostApiRestartResponse(rsp)
 }
 
-// GetApiRingWithResponse request returning *GetApiRingResponse
-func (c *ClientWithResponses) GetApiRingWithResponse(ctx context.Context, params *GetApiRingParams, reqEditors ...RequestEditorFn) (*GetApiRingResponse, error) {
-	rsp, err := c.GetApiRing(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiRingResponse(rsp)
-}
-
 // GetApiRoborockWithResponse request returning *GetApiRoborockResponse
 func (c *ClientWithResponses) GetApiRoborockWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiRoborockResponse, error) {
 	rsp, err := c.GetApiRoborock(ctx, reqEditors...)
@@ -6518,24 +3655,6 @@ func (c *ClientWithResponses) GetApiRoborockWithResponse(ctx context.Context, re
 		return nil, err
 	}
 	return ParseGetApiRoborockResponse(rsp)
-}
-
-// PostApiRoborockWithBodyWithResponse request with arbitrary body returning *PostApiRoborockResponse
-func (c *ClientWithResponses) PostApiRoborockWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiRoborockResponse, error) {
-	rsp, err := c.PostApiRoborockWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostApiRoborockResponse(rsp)
-}
-
-// GetApiSchemesWithResponse request returning *GetApiSchemesResponse
-func (c *ClientWithResponses) GetApiSchemesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiSchemesResponse, error) {
-	rsp, err := c.GetApiSchemes(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiSchemesResponse(rsp)
 }
 
 // GetApiStackWithResponse request returning *GetApiStackResponse
@@ -6547,24 +3666,6 @@ func (c *ClientWithResponses) GetApiStackWithResponse(ctx context.Context, reqEd
 	return ParseGetApiStackResponse(rsp)
 }
 
-// GetApiStreamAacsrcSrcWithResponse request returning *GetApiStreamAacsrcSrcResponse
-func (c *ClientWithResponses) GetApiStreamAacsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamAacsrcSrcResponse, error) {
-	rsp, err := c.GetApiStreamAacsrcSrc(ctx, src, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamAacsrcSrcResponse(rsp)
-}
-
-// GetApiStreamAsciisrcSrcWithResponse request returning *GetApiStreamAsciisrcSrcResponse
-func (c *ClientWithResponses) GetApiStreamAsciisrcSrcWithResponse(ctx context.Context, src StreamSrcPath, params *GetApiStreamAsciisrcSrcParams, reqEditors ...RequestEditorFn) (*GetApiStreamAsciisrcSrcResponse, error) {
-	rsp, err := c.GetApiStreamAsciisrcSrc(ctx, src, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamAsciisrcSrcResponse(rsp)
-}
-
 // PostApiStreamFlvdstDstWithResponse request returning *PostApiStreamFlvdstDstResponse
 func (c *ClientWithResponses) PostApiStreamFlvdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiStreamFlvdstDstResponse, error) {
 	rsp, err := c.PostApiStreamFlvdstDst(ctx, dst, reqEditors...)
@@ -6572,15 +3673,6 @@ func (c *ClientWithResponses) PostApiStreamFlvdstDstWithResponse(ctx context.Con
 		return nil, err
 	}
 	return ParsePostApiStreamFlvdstDstResponse(rsp)
-}
-
-// GetApiStreamFlvsrcSrcWithResponse request returning *GetApiStreamFlvsrcSrcResponse
-func (c *ClientWithResponses) GetApiStreamFlvsrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamFlvsrcSrcResponse, error) {
-	rsp, err := c.GetApiStreamFlvsrcSrc(ctx, src, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamFlvsrcSrcResponse(rsp)
 }
 
 // GetApiStreamM3u8srcSrcWithResponse request returning *GetApiStreamM3u8srcSrcResponse
@@ -6628,33 +3720,6 @@ func (c *ClientWithResponses) PostApiStreamTsdstDstWithResponse(ctx context.Cont
 	return ParsePostApiStreamTsdstDstResponse(rsp)
 }
 
-// GetApiStreamTssrcSrcWithResponse request returning *GetApiStreamTssrcSrcResponse
-func (c *ClientWithResponses) GetApiStreamTssrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamTssrcSrcResponse, error) {
-	rsp, err := c.GetApiStreamTssrcSrc(ctx, src, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamTssrcSrcResponse(rsp)
-}
-
-// GetApiStreamY4msrcSrcWithResponse request returning *GetApiStreamY4msrcSrcResponse
-func (c *ClientWithResponses) GetApiStreamY4msrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamY4msrcSrcResponse, error) {
-	rsp, err := c.GetApiStreamY4msrcSrc(ctx, src, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamY4msrcSrcResponse(rsp)
-}
-
-// PostApiStreamdstDstWithResponse request returning *PostApiStreamdstDstResponse
-func (c *ClientWithResponses) PostApiStreamdstDstWithResponse(ctx context.Context, dst StreamDstPath, reqEditors ...RequestEditorFn) (*PostApiStreamdstDstResponse, error) {
-	rsp, err := c.PostApiStreamdstDst(ctx, dst, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostApiStreamdstDstResponse(rsp)
-}
-
 // DeleteApiStreamsWithResponse request returning *DeleteApiStreamsResponse
 func (c *ClientWithResponses) DeleteApiStreamsWithResponse(ctx context.Context, params *DeleteApiStreamsParams, reqEditors ...RequestEditorFn) (*DeleteApiStreamsResponse, error) {
 	rsp, err := c.DeleteApiStreams(ctx, params, reqEditors...)
@@ -6700,15 +3765,6 @@ func (c *ClientWithResponses) PutApiStreamsWithResponse(ctx context.Context, par
 	return ParsePutApiStreamsResponse(rsp)
 }
 
-// GetApiStreamsDotWithResponse request returning *GetApiStreamsDotResponse
-func (c *ClientWithResponses) GetApiStreamsDotWithResponse(ctx context.Context, params *GetApiStreamsDotParams, reqEditors ...RequestEditorFn) (*GetApiStreamsDotResponse, error) {
-	rsp, err := c.GetApiStreamsDot(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiStreamsDotResponse(rsp)
-}
-
 // GetApiStreamssrcSrcWithResponse request returning *GetApiStreamssrcSrcResponse
 func (c *ClientWithResponses) GetApiStreamssrcSrcWithResponse(ctx context.Context, src StreamSrcPath, reqEditors ...RequestEditorFn) (*GetApiStreamssrcSrcResponse, error) {
 	rsp, err := c.GetApiStreamssrcSrc(ctx, src, reqEditors...)
@@ -6716,24 +3772,6 @@ func (c *ClientWithResponses) GetApiStreamssrcSrcWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseGetApiStreamssrcSrcResponse(rsp)
-}
-
-// GetApiTuyaWithResponse request returning *GetApiTuyaResponse
-func (c *ClientWithResponses) GetApiTuyaWithResponse(ctx context.Context, params *GetApiTuyaParams, reqEditors ...RequestEditorFn) (*GetApiTuyaResponse, error) {
-	rsp, err := c.GetApiTuya(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiTuyaResponse(rsp)
-}
-
-// GetApiV4l2WithResponse request returning *GetApiV4l2Response
-func (c *ClientWithResponses) GetApiV4l2WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV4l2Response, error) {
-	rsp, err := c.GetApiV4l2(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiV4l2Response(rsp)
 }
 
 // PostApiWebrtcdstDstWithResponse request returning *PostApiWebrtcdstDstResponse
@@ -6798,15 +3836,6 @@ func (c *ClientWithResponses) PostApiWebtorrentsrcSrcWithResponse(ctx context.Co
 	return ParsePostApiWebtorrentsrcSrcResponse(rsp)
 }
 
-// GetApiWsWithResponse request returning *GetApiWsResponse
-func (c *ClientWithResponses) GetApiWsWithResponse(ctx context.Context, params *GetApiWsParams, reqEditors ...RequestEditorFn) (*GetApiWsResponse, error) {
-	rsp, err := c.GetApiWs(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetApiWsResponse(rsp)
-}
-
 // GetOnvifWithResponse request returning *GetOnvifResponse
 func (c *ClientWithResponses) GetOnvifWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetOnvifResponse, error) {
 	rsp, err := c.GetOnvif(ctx, reqEditors...)
@@ -6814,24 +3843,6 @@ func (c *ClientWithResponses) GetOnvifWithResponse(ctx context.Context, reqEdito
 		return nil, err
 	}
 	return ParseGetOnvifResponse(rsp)
-}
-
-// PostPairSetupWithBodyWithResponse request with arbitrary body returning *PostPairSetupResponse
-func (c *ClientWithResponses) PostPairSetupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostPairSetupResponse, error) {
-	rsp, err := c.PostPairSetupWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostPairSetupResponse(rsp)
-}
-
-// PostPairVerifyWithBodyWithResponse request with arbitrary body returning *PostPairVerifyResponse
-func (c *ClientWithResponses) PostPairVerifyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostPairVerifyResponse, error) {
-	rsp, err := c.PostPairVerifyWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePostPairVerifyResponse(rsp)
 }
 
 // GetStreamWithResponse request returning *GetStreamResponse
@@ -6852,40 +3863,6 @@ func ParseGetApiResponse(rsp *http.Response) (*GetApiResponse, error) {
 	}
 
 	response := &GetApiResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			ConfigPath *string `json:"config_path,omitempty"`
-			Host       *string `json:"host,omitempty"`
-			Rtsp       *struct {
-				DefaultQuery *string `json:"default_query,omitempty"`
-				Listen       *string `json:"listen,omitempty"`
-			} `json:"rtsp,omitempty"`
-			Version *string `json:"version,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiAlsaResponse parses an HTTP response from a GetApiAlsaWithResponse call
-func ParseGetApiAlsaResponse(rsp *http.Response) (*GetApiAlsaResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiAlsaResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -6941,22 +3918,6 @@ func ParsePostApiConfigResponse(rsp *http.Response) (*PostApiConfigResponse, err
 	return response, nil
 }
 
-// ParseGetApiDiscoveryHomekitResponse parses an HTTP response from a GetApiDiscoveryHomekitWithResponse call
-func ParseGetApiDiscoveryHomekitResponse(rsp *http.Response) (*GetApiDiscoveryHomekitResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiDiscoveryHomekitResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetApiDvripResponse parses an HTTP response from a GetApiDvripWithResponse call
 func ParseGetApiDvripResponse(rsp *http.Response) (*GetApiDvripResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -6982,22 +3943,6 @@ func ParsePostApiExitResponse(rsp *http.Response) (*PostApiExitResponse, error) 
 	}
 
 	response := &PostApiExitResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostApiFfmpegResponse parses an HTTP response from a PostApiFfmpegWithResponse call
-func ParsePostApiFfmpegResponse(rsp *http.Response) (*PostApiFfmpegResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiFfmpegResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -7069,22 +4014,6 @@ func ParseGetApiFrameMp4srcSrcResponse(rsp *http.Response) (*GetApiFrameMp4srcSr
 	return response, nil
 }
 
-// ParseGetApiGoproResponse parses an HTTP response from a GetApiGoproWithResponse call
-func ParseGetApiGoproResponse(rsp *http.Response) (*GetApiGoproResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiGoproResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetApiHassResponse parses an HTTP response from a GetApiHassWithResponse call
 func ParseGetApiHassResponse(rsp *http.Response) (*GetApiHassResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7101,86 +4030,6 @@ func ParseGetApiHassResponse(rsp *http.Response) (*GetApiHassResponse, error) {
 	return response, nil
 }
 
-// ParseGetApiHlsInitMp4idIdResponse parses an HTTP response from a GetApiHlsInitMp4idIdWithResponse call
-func ParseGetApiHlsInitMp4idIdResponse(rsp *http.Response) (*GetApiHlsInitMp4idIdResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiHlsInitMp4idIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiHlsPlaylistM3u8idIdResponse parses an HTTP response from a GetApiHlsPlaylistM3u8idIdWithResponse call
-func ParseGetApiHlsPlaylistM3u8idIdResponse(rsp *http.Response) (*GetApiHlsPlaylistM3u8idIdResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiHlsPlaylistM3u8idIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiHlsSegmentM4sidIdResponse parses an HTTP response from a GetApiHlsSegmentM4sidIdWithResponse call
-func ParseGetApiHlsSegmentM4sidIdResponse(rsp *http.Response) (*GetApiHlsSegmentM4sidIdResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiHlsSegmentM4sidIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiHlsSegmentTsidIdResponse parses an HTTP response from a GetApiHlsSegmentTsidIdWithResponse call
-func ParseGetApiHlsSegmentTsidIdResponse(rsp *http.Response) (*GetApiHlsSegmentTsidIdResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiHlsSegmentTsidIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseDeleteApiHomekitResponse parses an HTTP response from a DeleteApiHomekitWithResponse call
-func ParseDeleteApiHomekitResponse(rsp *http.Response) (*DeleteApiHomekitResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteApiHomekitResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetApiHomekitResponse parses an HTTP response from a GetApiHomekitWithResponse call
 func ParseGetApiHomekitResponse(rsp *http.Response) (*GetApiHomekitResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7190,70 +4039,6 @@ func ParseGetApiHomekitResponse(rsp *http.Response) (*GetApiHomekitResponse, err
 	}
 
 	response := &GetApiHomekitResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostApiHomekitResponse parses an HTTP response from a PostApiHomekitWithResponse call
-func ParsePostApiHomekitResponse(rsp *http.Response) (*PostApiHomekitResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiHomekitResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiHomekitAccessoriesResponse parses an HTTP response from a GetApiHomekitAccessoriesWithResponse call
-func ParseGetApiHomekitAccessoriesResponse(rsp *http.Response) (*GetApiHomekitAccessoriesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiHomekitAccessoriesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseDeleteApiLogResponse parses an HTTP response from a DeleteApiLogWithResponse call
-func ParseDeleteApiLogResponse(rsp *http.Response) (*DeleteApiLogResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteApiLogResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiLogResponse parses an HTTP response from a GetApiLogWithResponse call
-func ParseGetApiLogResponse(rsp *http.Response) (*GetApiLogResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiLogResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -7322,19 +4107,6 @@ func ParseGetApiPreloadResponse(rsp *http.Response) (*GetApiPreloadResponse, err
 		HTTPResponse: rsp,
 	}
 
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]struct {
-			Consumer *map[string]interface{} `json:"consumer,omitempty"`
-			Query    *string                 `json:"query,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
 	return response, nil
 }
 
@@ -7370,22 +4142,6 @@ func ParsePostApiRestartResponse(rsp *http.Response) (*PostApiRestartResponse, e
 	return response, nil
 }
 
-// ParseGetApiRingResponse parses an HTTP response from a GetApiRingWithResponse call
-func ParseGetApiRingResponse(rsp *http.Response) (*GetApiRingResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiRingResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetApiRoborockResponse parses an HTTP response from a GetApiRoborockWithResponse call
 func ParseGetApiRoborockResponse(rsp *http.Response) (*GetApiRoborockResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7397,48 +4153,6 @@ func ParseGetApiRoborockResponse(rsp *http.Response) (*GetApiRoborockResponse, e
 	response := &GetApiRoborockResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostApiRoborockResponse parses an HTTP response from a PostApiRoborockWithResponse call
-func ParsePostApiRoborockResponse(rsp *http.Response) (*PostApiRoborockResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiRoborockResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiSchemesResponse parses an HTTP response from a GetApiSchemesWithResponse call
-func ParseGetApiSchemesResponse(rsp *http.Response) (*GetApiSchemesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiSchemesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []string
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
 	}
 
 	return response, nil
@@ -7460,38 +4174,6 @@ func ParseGetApiStackResponse(rsp *http.Response) (*GetApiStackResponse, error) 
 	return response, nil
 }
 
-// ParseGetApiStreamAacsrcSrcResponse parses an HTTP response from a GetApiStreamAacsrcSrcWithResponse call
-func ParseGetApiStreamAacsrcSrcResponse(rsp *http.Response) (*GetApiStreamAacsrcSrcResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamAacsrcSrcResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiStreamAsciisrcSrcResponse parses an HTTP response from a GetApiStreamAsciisrcSrcWithResponse call
-func ParseGetApiStreamAsciisrcSrcResponse(rsp *http.Response) (*GetApiStreamAsciisrcSrcResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamAsciisrcSrcResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParsePostApiStreamFlvdstDstResponse parses an HTTP response from a PostApiStreamFlvdstDstWithResponse call
 func ParsePostApiStreamFlvdstDstResponse(rsp *http.Response) (*PostApiStreamFlvdstDstResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7501,22 +4183,6 @@ func ParsePostApiStreamFlvdstDstResponse(rsp *http.Response) (*PostApiStreamFlvd
 	}
 
 	response := &PostApiStreamFlvdstDstResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiStreamFlvsrcSrcResponse parses an HTTP response from a GetApiStreamFlvsrcSrcWithResponse call
-func ParseGetApiStreamFlvsrcSrcResponse(rsp *http.Response) (*GetApiStreamFlvsrcSrcResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamFlvsrcSrcResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -7604,54 +4270,6 @@ func ParsePostApiStreamTsdstDstResponse(rsp *http.Response) (*PostApiStreamTsdst
 	return response, nil
 }
 
-// ParseGetApiStreamTssrcSrcResponse parses an HTTP response from a GetApiStreamTssrcSrcWithResponse call
-func ParseGetApiStreamTssrcSrcResponse(rsp *http.Response) (*GetApiStreamTssrcSrcResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamTssrcSrcResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiStreamY4msrcSrcResponse parses an HTTP response from a GetApiStreamY4msrcSrcWithResponse call
-func ParseGetApiStreamY4msrcSrcResponse(rsp *http.Response) (*GetApiStreamY4msrcSrcResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamY4msrcSrcResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostApiStreamdstDstResponse parses an HTTP response from a PostApiStreamdstDstWithResponse call
-func ParsePostApiStreamdstDstResponse(rsp *http.Response) (*PostApiStreamdstDstResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiStreamdstDstResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseDeleteApiStreamsResponse parses an HTTP response from a DeleteApiStreamsWithResponse call
 func ParseDeleteApiStreamsResponse(rsp *http.Response) (*DeleteApiStreamsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7679,19 +4297,6 @@ func ParseGetApiStreamsResponse(rsp *http.Response) (*GetApiStreamsResponse, err
 	response := &GetApiStreamsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]struct {
-			Consumers *[]interface{} `json:"consumers,omitempty"`
-			Producers *[]interface{} `json:"producers,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
 	}
 
 	return response, nil
@@ -7745,22 +4350,6 @@ func ParsePutApiStreamsResponse(rsp *http.Response) (*PutApiStreamsResponse, err
 	return response, nil
 }
 
-// ParseGetApiStreamsDotResponse parses an HTTP response from a GetApiStreamsDotWithResponse call
-func ParseGetApiStreamsDotResponse(rsp *http.Response) (*GetApiStreamsDotResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiStreamsDotResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetApiStreamssrcSrcResponse parses an HTTP response from a GetApiStreamssrcSrcWithResponse call
 func ParseGetApiStreamssrcSrcResponse(rsp *http.Response) (*GetApiStreamssrcSrcResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7770,51 +4359,6 @@ func ParseGetApiStreamssrcSrcResponse(rsp *http.Response) (*GetApiStreamssrcSrcR
 	}
 
 	response := &GetApiStreamssrcSrcResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]struct {
-			Consumers *[]map[string]interface{} `json:"consumers,omitempty"`
-			Producers *[]map[string]interface{} `json:"producers,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiTuyaResponse parses an HTTP response from a GetApiTuyaWithResponse call
-func ParseGetApiTuyaResponse(rsp *http.Response) (*GetApiTuyaResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiTuyaResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParseGetApiV4l2Response parses an HTTP response from a GetApiV4l2WithResponse call
-func ParseGetApiV4l2Response(rsp *http.Response) (*GetApiV4l2Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiV4l2Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -7918,22 +4462,6 @@ func ParsePostApiWebtorrentsrcSrcResponse(rsp *http.Response) (*PostApiWebtorren
 	return response, nil
 }
 
-// ParseGetApiWsResponse parses an HTTP response from a GetApiWsWithResponse call
-func ParseGetApiWsResponse(rsp *http.Response) (*GetApiWsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiWsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
 // ParseGetOnvifResponse parses an HTTP response from a GetOnvifWithResponse call
 func ParseGetOnvifResponse(rsp *http.Response) (*GetOnvifResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -7943,38 +4471,6 @@ func ParseGetOnvifResponse(rsp *http.Response) (*GetOnvifResponse, error) {
 	}
 
 	response := &GetOnvifResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostPairSetupResponse parses an HTTP response from a PostPairSetupWithResponse call
-func ParsePostPairSetupResponse(rsp *http.Response) (*PostPairSetupResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostPairSetupResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
-}
-
-// ParsePostPairVerifyResponse parses an HTTP response from a PostPairVerifyWithResponse call
-func ParsePostPairVerifyResponse(rsp *http.Response) (*PostPairVerifyResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostPairVerifyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -8001,93 +4497,52 @@ func ParseGetStreamResponse(rsp *http.Response) (*GetStreamResponse, error) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
