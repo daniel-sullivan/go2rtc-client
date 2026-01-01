@@ -78,8 +78,9 @@ jobs:
               body: '🔄 **Generation in progress...**\n\n✅ Checked out repository\n✅ Set up Go environment\n✅ Downloaded OpenAPI spec\n✅ Generated client code\n📝 Committing generated code...'
             });
 
-      - name: Delete tag
+      - name: Delete tag (local and remote)
         run: |
+          git tag -d ${{ github.event.release.tag_name }} || true
           git push --delete origin ${{ github.event.release.tag_name }} || true
 
       - name: Configure Git
@@ -95,8 +96,8 @@ jobs:
 
       - name: Create tag
         run: |
-          git tag ${{ github.event.release.tag_name }}
-          git push origin ${{ github.event.release.tag_name }}
+          git tag -f ${{ github.event.release.tag_name }}
+          git push -f origin ${{ github.event.release.tag_name }}
 
       - name: Update Release
         uses: actions/github-script@v7
