@@ -1,0 +1,8 @@
+package: go2rtcclient
+output: client.go
+generate:
+  client: true
+  models: true
+  embedded-spec: true
+output-options:
+  skip-prune: true

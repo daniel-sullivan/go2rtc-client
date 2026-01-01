@@ -1,0 +1,80 @@
+name: Generate Client and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      go2rtc_version:
+        description: 'go2rtc release tag (e.g., v1.9.13)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache: true
+
+      - name: Download OpenAPI specification
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/AlexxIT/go2rtc/${{ github.event.inputs.go2rtc_version }}/api/openapi.yaml" -o openapi.yaml
+          echo "Downloaded openapi.yaml from go2rtc ${{ github.event.inputs.go2rtc_version }}"
+
+      - name: Generate client
+        run: |
+          go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest -config oapi-codegen.yaml openapi.yaml
+          echo "Client generated successfully"
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit generated code
+        run: |
+          git add client.go go.mod go.sum
+          git commit -m "Generate client for go2rtc ${{ github.event.inputs.go2rtc_version }}"
+          git push
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.go2rtc_version }}
+          name: Release ${{ github.event.inputs.go2rtc_version }}
+          body: |
+            Generated Go client for go2rtc ${{ github.event.inputs.go2rtc_version }}
+
+            **Upstream Release:** https://github.com/AlexxIT/go2rtc/releases/tag/${{ github.event.inputs.go2rtc_version }}
+
+            ## Installation
+
+            ```bash
+            go get github.com/daniel-sullivan/go2rtc-client@${{ github.event.inputs.go2rtc_version }}
+            ```
+
+            ## Usage
+
+            ```go
+            import "github.com/daniel-sullivan/go2rtc-client"
+
+            func main() {
+                client, err := go2rtcclient.NewClient("http://localhost:1984")
+                if err != nil {
+                    panic(err)
+                }
+                // Use the client...
+            }
+            ```
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
